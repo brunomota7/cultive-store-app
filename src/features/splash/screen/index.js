@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useRef } from "react";
-import { Animated, View } from "react-native";
+import { Animated, Text, View } from "react-native";
 import styles from "../styles/splashStyles";
 
 export default function SplashScreen() {

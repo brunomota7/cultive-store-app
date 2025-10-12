@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "900",
     marginBottom: 8,
-    color: colors.textWhite,
+    color: colors.primary,
   },
   slogan: {
     fontSize: 16,

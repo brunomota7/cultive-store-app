@@ -1,8 +1,8 @@
 
 export default {
-  primary: "#007A5E",         
-  primaryLight: "#1ABF8A",    
-  secondary: "#A3D900",      
+  primary: "#007260",         
+  primaryLight: "#149a7f",    
+  secondary: "#39B68D",      
 
   accentRed: "#D94F4F",       
   accentOrange: "#FF8C42",    
