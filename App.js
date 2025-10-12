@@ -12,6 +12,7 @@ import GoogleScreen from "./src/features/auth/socialAuth/screen/googleScreen";
 import ForgotPassword from "./src/features/auth/forgotPassword/screen/forgotPassword";
 import ValidateCode from "./src/features/auth/forgotPassword/screen/validateCode";
 import ChangePassword from "./src/features/auth/forgotPassword/screen/changePassword";
+import HomeScreen from "./src/features/home/screen/home";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -28,7 +29,7 @@ function HomeDrawer() {
         drawerActiveBackgroundColor: colors.primary,
       }}
     >
-
+      <Drawer.Screen name="Home" component={HomeScreen} />
     </Drawer.Navigator>
   );
 }
@@ -50,6 +51,8 @@ export default function App() {
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
           <Stack.Screen name="ValidateCode" component={ValidateCode} />
           <Stack.Screen name="ChangePassword" component={ChangePassword} />
+
+          <Stack.Screen name="Home" component={HomeDrawer} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

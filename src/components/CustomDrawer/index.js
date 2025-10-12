@@ -3,7 +3,7 @@ import colors from "../../constants/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const drawerItem = [
-  { label: "Perfil", icon: "person", route: "Perfil" },
+  { label: "Perfil", icon: "account", route: "Perfil" },
   { label: "Troca de Senha", icon: "lock", route: "ChangePassword" },
   { label: "Sair", icon: "logout", route: "Login" },
 ];
@@ -20,7 +20,7 @@ export default function CustomDrawer(props) {
           label={item.icon}
           icon={() => (
             <MaterialCommunityIcons
-              name={item.label}
+              name={item.icon}
               size={22}
               color={colors.primaryLight}
             />
