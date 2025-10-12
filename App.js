@@ -9,6 +9,9 @@ import LoginScreen from "./src/features/auth/authScreens/screens/login";
 import RegisterScreen from "./src/features/auth/authScreens/screens/register";
 import FacebookScreen from "./src/features/auth/socialAuth/screen/facebookScreen";
 import GoogleScreen from "./src/features/auth/socialAuth/screen/googleScreen";
+import ForgotPassword from "./src/features/auth/forgotPassword/screen/forgotPassword";
+import ValidateCode from "./src/features/auth/forgotPassword/screen/validateCode";
+import ChangePassword from "./src/features/auth/forgotPassword/screen/changePassword";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -44,6 +47,9 @@ export default function App() {
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="FacebookAuth" component={FacebookScreen} />
           <Stack.Screen name="GoogleAuth" component={GoogleScreen} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+          <Stack.Screen name="ValidateCode" component={ValidateCode} />
+          <Stack.Screen name="ChangePassword" component={ChangePassword} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
