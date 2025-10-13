@@ -10,10 +10,11 @@ import {
   View,
 } from "react-native";
 import colors from "../../../../constants/colors";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function HeaderHome({ navigation }) {
-  const [avatarUri, setAvatarUri] = useState(null);
   const fadeAnim = useRef(new Animated.Value(0)).current;
+  const [notificationCount, setNotificationCount] = useState(3);
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -23,47 +24,27 @@ export default function HeaderHome({ navigation }) {
     }).start();
   }, []);
 
-  const choosePhoto = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      Alert.alert("Erro", "Permissão necessária para acessar as fotos");
-      return;
-    }
-
-    const resullt = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 0.8,
-      allowsEditing: true,
-    });
-
-    if (!resullt.canceled) {
-      setAvatarUri(resullt.assets[0].uri);
-    }
-  };
-
   return (
     <View style={styles.header}>
-      <TouchableOpacity
-        style={styles.menuButton}
-        onPress={navigation}
-      >
-        <Text style={styles.menuIcon}>☰</Text>
-      </TouchableOpacity>
-
       <Animated.View style={{ opacity: fadeAnim }}>
         <Text style={styles.logoText}>Cultive+</Text>
-        <Text style={styles.subTitleText}>Store</Text>
+        {/* <Text style={styles.subTitleText}>Store</Text> */}
       </Animated.View>
 
-      <TouchableOpacity onPress={choosePhoto}>
-        <Image
-          source={
-            avatarUri
-              ? { uri: avatarUri }
-              : require("../../../../../assets/images/avatar.png")
-          }
-          style={styles.avatarUser}
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Notifications")}
+        style={styles.notificationBtn}
+      >
+        <MaterialCommunityIcons
+          name="bell-outline"
+          size={22}
+          color={colors.zinc}
         />
+        {notificationCount > 0 && (
+          <View style={styles.badge}>
+            <Text style={styles.badgeText}>{notificationCount}</Text>
+          </View>
+        )}
       </TouchableOpacity>
     </View>
   );
@@ -97,11 +78,27 @@ const styles = StyleSheet.create({
     marginTop: 2,
     color: colors.accentOrange,
   },
-  avatarUser: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: colors.textMuted,
+  notificationBtn: {
+    position: "relative",
+    padding: 10,
+    borderRadius: 50,
+    backgroundColor: colors.surface,
+  },
+  badge: {
+    position: "absolute",
+    top: 2,
+    right: 2,
+    backgroundColor: colors.danger,
+    borderRadius: 10,
+    paddingHorizontal: 5,
+    paddingVertical: 2,
+    minWidth: 18,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  badgeText: {
+    color: colors.textWhite,
+    fontSize: 10,
+    fontWeight: "bold",
   },
 });

@@ -17,7 +17,7 @@ export default function CustomDrawer(props) {
       {drawerItem.map((item) => (
         <DrawerItem
           key={item.label}
-          label={item.icon}
+          label={item.label}
           icon={() => (
             <MaterialCommunityIcons
               name={item.icon}
