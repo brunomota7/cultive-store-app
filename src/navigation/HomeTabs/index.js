@@ -1,7 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import colors from "../../constants/colors";
-import HomeScreen from "../../features/home/screen/home";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import HomeScreen from "../../features/home/screen/home";
+import colors from "../../constants/colors";
+import { Platform } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -10,10 +11,24 @@ export default function HomeTabs() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarShowLabel: true,
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: "600",
+          marginBottom: Platform.OS === "android" ? 6 : 0,
+        },
         tabBarStyle: {
+          height: 70,
+          paddingBottom: 8,
+          paddingTop: 6,
           borderTopWidth: 1,
           borderTopColor: colors.border,
           backgroundColor: colors.surface,
+          elevation: 10,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: -2 },
+          shadowOpacity: 0.05,
+          shadowRadius: 6,
         },
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.textMuted,
@@ -23,9 +38,9 @@ export default function HomeTabs() {
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarLabel: "Ínicio",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+          tabBarLabel: "Início",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home-outline" color={color} size={24} />
           ),
         }}
       />
@@ -33,8 +48,9 @@ export default function HomeTabs() {
         name="Compras"
         component={HomeScreen}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="cart" color={color} size={size} />
+          tabBarLabel: "Compras",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="cart-outline" color={color} size={24} />
           ),
         }}
       />
@@ -42,8 +58,9 @@ export default function HomeTabs() {
         name="Perfil"
         component={HomeScreen}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+          tabBarLabel: "Perfil",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account-outline" color={color} size={24} />
           ),
         }}
       />
