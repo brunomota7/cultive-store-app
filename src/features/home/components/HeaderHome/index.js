@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import * as ImagePicker from "expo-image-picker";
 import {
-  Alert,
   Animated,
-  Image,
   StyleSheet,
   Text,
   TouchableOpacity,

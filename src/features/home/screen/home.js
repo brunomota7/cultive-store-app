@@ -20,21 +20,22 @@ import { MaterialIcons } from "@expo/vector-icons";
 import AddressModal from "../modals/ModalAddress/addressModal";
 import colors from "../../../constants/colors";
 import Onboarding from "../../../components/Onboarding";
+import { useNavigation } from "@react-navigation/native";
 
 const user = {
   name: "Bruno",
   address: "R. dos Cedros, 12",
 };
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen() {
+  const navigation = useNavigation();
   const [products, setProducts] = useState(MockProducts);
   const [search, setSearch] = useState("");
 
   const lastPurchases = products.slice(0, 5);
 
-  const filteredProduct = MockProducts.filter((p) =>
-    p.isFeatured &&
-    p.name.toLowerCase().includes(search.toLowerCase())
+  const filteredProduct = MockProducts.filter(
+    (p) => p.isFeatured && p.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -44,15 +45,14 @@ export default function HomeScreen({ navigation }) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <ScrollView style={styles.content}>
-
           {/* Header */}
           <HeaderHome navigation={() => navigation.openDrawer()} />
 
           {/* Slide */}
-          <Onboarding /> 
+          <Onboarding />
 
           {/* Categorys */}
-          <CategoryCard /> 
+          <CategoryCard />
 
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Últimas compras</Text>
@@ -61,7 +61,9 @@ export default function HomeScreen({ navigation }) {
                 <TouchableOpacity
                   key={item.productId}
                   style={styles.purchaseCard}
-                  onPress={() => console.log("Detalhes do produto:", item.name)}
+                  onPress={() =>
+                    navigation.navigate("ProductDetails", { product: item })
+                  }
                 >
                   <Image
                     source={{ uri: item.imageUrl }}
@@ -73,14 +75,16 @@ export default function HomeScreen({ navigation }) {
             </ScrollView>
           </View>
 
-          <Text style={[styles.sectionTitle, { marginHorizontal: 16 }]}>Produtos em destaque</Text>
+          <Text style={[styles.sectionTitle, { marginHorizontal: 16 }]}>
+            Produtos em destaque
+          </Text>
           <SearchButton
             value={search}
             onChangeText={setSearch}
             placeholder={"Buscar produto..."}
             colorIcon={colors.secondary}
             style={{
-              marginHorizontal: 16 
+              marginHorizontal: 16,
             }}
           />
 
@@ -88,7 +92,9 @@ export default function HomeScreen({ navigation }) {
             <TouchableOpacity
               key={item.productId}
               style={[styles.productCard, { marginHorizontal: 16 }]}
-              onPress={() => console.log("Abrir detalhes")}
+              onPress={() =>
+                navigation.navigate("ProductDetails", { product: item })
+              }
             >
               <Image
                 source={{ uri: item.imageUrl }}

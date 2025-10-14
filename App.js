@@ -10,9 +10,9 @@ import GoogleScreen from "./src/features/auth/socialAuth/screen/googleScreen";
 import ForgotPassword from "./src/features/auth/forgotPassword/screen/forgotPassword";
 import ValidateCode from "./src/features/auth/forgotPassword/screen/validateCode";
 import ChangePassword from "./src/features/auth/forgotPassword/screen/changePassword";
-import HomeScreen from "./src/features/home/screen/home";
 import HomeTabs from "./src/navigation/HomeTabs";
 import ProductScreenByCategory from "./src/features/home/components/ProductWrapper";
+import ProductDetails from "./src/features/product/screen/productDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,7 +35,8 @@ export default function App() {
           <Stack.Screen name="ChangePassword" component={ChangePassword} />
 
           <Stack.Screen name="Home" component={HomeTabs} />
-           <Stack.Screen name="ProductScreenByCategory" component={ProductScreenByCategory} />
+          <Stack.Screen name="ProductScreenByCategory" component={ProductScreenByCategory} />
+          <Stack.Screen name="ProductDetails" component={ProductDetails} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
