@@ -12,6 +12,7 @@ const MockProducts = [
     registrationDate: "2025-10-01T08:30:00",
     lastUpdate: "2025-10-10T10:00:00",
     available: true,
+    isFeatured: true,
     imageUrl:
       "https://52586.cdn.lojaquevende.com.br/static/52586/sku/verduras-Alface-Crespa-1586828067472.jpg",
     userName: "João Silva",
@@ -30,6 +31,7 @@ const MockProducts = [
     registrationDate: "2025-09-25T09:00:00",
     lastUpdate: "2025-10-11T11:15:00",
     available: true,
+    isFeatured: true,
     imageUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8bWa72kK2pezgGQQ545NhnUC5QqlYzWNbvA&s",
     userName: "Maria Oliveira",
@@ -48,6 +50,7 @@ const MockProducts = [
     registrationDate: "2025-09-20T07:45:00",
     lastUpdate: "2025-10-12T09:30:00",
     available: true,
+    isFeatured: true,
     imageUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLU56md9EBPquzAPYIer2Ka3aFuXHdJm8A_g&s",
     userName: "Carlos Mendes",
@@ -66,6 +69,7 @@ const MockProducts = [
     registrationDate: "2025-09-15T10:00:00",
     lastUpdate: "2025-10-10T08:00:00",
     available: true,
+    isFeatured: true,
     imageUrl:
       "https://www.embrapa.br/documents/58057223/65438219/acfeijao_pre_prod_cultivares_carica_fig+9_pioneiro.jpg/356bfd0b-77a5-f89b-31d1-51ca103a9ae4?t=1633998959179",
     userName: "Ana Souza",
@@ -84,6 +88,7 @@ const MockProducts = [
     registrationDate: "2025-09-18T12:00:00",
     lastUpdate: "2025-10-13T10:45:00",
     available: true,
+    isFeatured: true,
     imageUrl:
       "https://mercadoorganico.com/6428-large_default/batata-inglesa-organica-500g-osm.jpg",
     userName: "Fernanda Lima",
@@ -102,6 +107,7 @@ const MockProducts = [
     registrationDate: "2025-10-01T14:00:00",
     lastUpdate: "2025-10-12T16:30:00",
     available: true,
+    isFeatured: true,
     imageUrl:
       "https://static.vecteezy.com/ti/fotos-gratis/t2/20290747-manjericao-folhas-isolado-dentro-recorte-caminho-foto.jpg",
     userName: "Rafael Costa",
@@ -120,6 +126,7 @@ const MockProducts = [
     registrationDate: "2025-09-28T09:30:00",
     lastUpdate: "2025-10-11T13:00:00",
     available: true,
+    isFeatured: true,
     imageUrl:
       "https://img.freepik.com/fotos-premium/mel-puro-natural-pingando-no-favo-de-mel-isolado-no-fundo-branco_252965-942.jpg",
     userName: "Luciana Ribeiro",
@@ -138,6 +145,7 @@ const MockProducts = [
     registrationDate: "2025-10-05T08:00:00",
     lastUpdate: "2025-10-12T08:30:00",
     available: true,
+    isFeatured: true,
     imageUrl:
       "https://phygital-files.mercafacil.com/armazem-maria/uploads/produto/ovos_vermelho_caipira_golden_gd_bdj_30un_160ea6dc-bec2-4eb0-a5dd-667b9b5dd77c.jpeg",
     userName: "Pedro Martins",
@@ -156,6 +164,7 @@ const MockProducts = [
     registrationDate: "2025-10-02T11:00:00",
     lastUpdate: "2025-10-13T09:00:00",
     available: true,
+    isFeatured: true,
     imageUrl:
       "https://static.wixstatic.com/media/b6a417_3af6ef4ae4714f83bc3e3bb610737a1d~mv2.jpeg/v1/fit/w_500,h_500,q_90/file.jpg",
     userName: "Juliana Nunes",
@@ -172,8 +181,9 @@ const MockProducts = [
     registrationDate: "2025-10-14T09:00:00",
     lastUpdate: "2025-10-14T09:30:00",
     available: true,
+    isFeatured: true,
     imageUrl:
-      "https://www.organicosbrasil.com.br/wp-content/uploads/2016/06/rucula.jpg",
+      "https://www.hortifrutiorganico.com.br/145-large_default/rucula-organica-unidade.jpg",
     userName: "Bruna Costa",
     userEmail: "bruna.costa@cultive.com",
   },
@@ -187,6 +197,7 @@ const MockProducts = [
     registrationDate: "2025-10-13T10:00:00",
     lastUpdate: "2025-10-14T08:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.dicasdemulher.com.br/wp-content/uploads/2020/06/espinafre-0.jpg",
     userName: "Eduardo Lima",
@@ -202,6 +213,7 @@ const MockProducts = [
     registrationDate: "2025-10-12T11:00:00",
     lastUpdate: "2025-10-13T10:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.infoescola.com/wp-content/uploads/2010/06/almeirao_251404472.jpg",
     userName: "Renata Dias",
@@ -217,6 +229,7 @@ const MockProducts = [
     registrationDate: "2025-10-11T09:30:00",
     lastUpdate: "2025-10-13T09:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.hortas.info/wp-content/uploads/2020/06/couve-manteiga.jpg",
     userName: "Tiago Rocha",
@@ -233,6 +246,7 @@ const MockProducts = [
     registrationDate: "2025-10-10T10:00:00",
     lastUpdate: "2025-10-13T08:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.infoescola.com/wp-content/uploads/2010/06/maca-fuji_251404472.jpg",
     userName: "Camila Freitas",
@@ -248,6 +262,7 @@ const MockProducts = [
     registrationDate: "2025-10-09T09:00:00",
     lastUpdate: "2025-10-12T10:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.dicasdemulher.com.br/wp-content/uploads/2020/06/mamao-formosa.jpg",
     userName: "Diego Martins",
@@ -263,6 +278,7 @@ const MockProducts = [
     registrationDate: "2025-10-08T08:00:00",
     lastUpdate: "2025-10-11T09:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.infoescola.com/wp-content/uploads/2010/06/laranja-pera_251404472.jpg",
     userName: "Patrícia Gomes",
@@ -278,6 +294,7 @@ const MockProducts = [
     registrationDate: "2025-10-07T10:00:00",
     lastUpdate: "2025-10-10T11:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.hortas.info/wp-content/uploads/2020/06/abacaxi-perola.jpg",
     userName: "Rodrigo Almeida",
@@ -293,6 +310,7 @@ const MockProducts = [
     registrationDate: "2025-10-10T08:00:00",
     lastUpdate: "2025-10-13T09:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.hortifruti.com.br/media/catalog/product/cache/1/image/600x/abobrinha.jpg",
     userName: "Lívia Rocha",
@@ -308,6 +326,7 @@ const MockProducts = [
     registrationDate: "2025-10-09T10:00:00",
     lastUpdate: "2025-10-12T11:00:00",
     available: true,
+    isFeatured: false,
     imageUrl: "https://www.conquistesuavida.com.br/images/berinjela.jpg",
     userName: "Marcos Tavares",
     userEmail: "marcos.tavares@cultive.com",
@@ -322,6 +341,7 @@ const MockProducts = [
     registrationDate: "2025-10-08T09:00:00",
     lastUpdate: "2025-10-11T10:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.hortas.info/wp-content/uploads/2020/06/pepino-japones.jpg",
     userName: "Tatiane Melo",
@@ -337,6 +357,7 @@ const MockProducts = [
     registrationDate: "2025-10-07T08:00:00",
     lastUpdate: "2025-10-10T09:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.infoescola.com/wp-content/uploads/2010/06/chuchu_251404472.jpg",
     userName: "Vinícius Prado",
@@ -352,6 +373,7 @@ const MockProducts = [
     registrationDate: "2025-10-06T10:00:00",
     lastUpdate: "2025-10-09T11:00:00",
     available: true,
+    isFeatured: false,
     imageUrl: "https://www.arrozintegral.com.br/imagens/arroz-integral.jpg",
     userName: "Daniela Castro",
     userEmail: "daniela.castro@cultive.com",
@@ -366,6 +388,7 @@ const MockProducts = [
     registrationDate: "2025-10-05T09:00:00",
     lastUpdate: "2025-10-08T10:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.hortas.info/wp-content/uploads/2020/06/milho-verde.jpg",
     userName: "Joana Reis",
@@ -381,6 +404,7 @@ const MockProducts = [
     registrationDate: "2025-10-04T08:00:00",
     lastUpdate: "2025-10-07T09:00:00",
     available: true,
+    isFeatured: false,
     imageUrl: "https://www.conquistesuavida.com.br/images/quinoa.jpg",
     userName: "Felipe Andrade",
     userEmail: "felipe.andrade@cultive.com",
@@ -395,6 +419,7 @@ const MockProducts = [
     registrationDate: "2025-10-03T10:00:00",
     lastUpdate: "2025-10-06T11:00:00",
     available: true,
+    isFeatured: false,
     imageUrl: "https://www.hortas.info/wp-content/uploads/2020/06/aveia.jpg",
     userName: "Larissa Moura",
     userEmail: "larissa.moura@cultive.com",
@@ -409,6 +434,7 @@ const MockProducts = [
     registrationDate: "2025-10-02T09:00:00",
     lastUpdate: "2025-10-05T10:00:00",
     available: true,
+    isFeatured: false,
     imageUrl: "https://www.hortas.info/wp-content/uploads/2020/06/mandioca.jpg",
     userName: "Bruno Ferreira",
     userEmail: "bruno.ferreira@cultive.com",
@@ -423,6 +449,7 @@ const MockProducts = [
     registrationDate: "2025-10-01T08:00:00",
     lastUpdate: "2025-10-04T09:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.infoescola.com/wp-content/uploads/2010/06/inhame_251404472.jpg",
     userName: "Sofia Lima",
@@ -438,6 +465,7 @@ const MockProducts = [
     registrationDate: "2025-09-30T10:00:00",
     lastUpdate: "2025-10-03T11:00:00",
     available: true,
+    isFeatured: false,
     imageUrl: "https://www.hortas.info/wp-content/uploads/2020/06/cara.jpg",
     userName: "Gabriel Nunes",
     userEmail: "gabriel.nunes@cultive.com",
@@ -452,6 +480,7 @@ const MockProducts = [
     registrationDate: "2025-09-29T09:00:00",
     lastUpdate: "2025-10-02T10:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.hortas.info/wp-content/uploads/2020/06/batata-doce-roxa.jpg",
     userName: "Isabela Souza",
@@ -467,6 +496,7 @@ const MockProducts = [
     registrationDate: "2025-10-01T10:00:00",
     lastUpdate: "2025-10-03T11:00:00",
     available: true,
+    isFeatured: false,
     imageUrl: "https://www.hortas.info/wp-content/uploads/2020/06/alecrim.jpg",
     userName: "Cláudia Ramos",
     userEmail: "claudia.ramos@cultive.com",
@@ -481,6 +511,7 @@ const MockProducts = [
     registrationDate: "2025-09-30T09:00:00",
     lastUpdate: "2025-10-02T10:00:00",
     available: true,
+    isFeatured: false,
     imageUrl: "https://www.hortas.info/wp-content/uploads/2020/06/oregano.jpg",
     userName: "Fernando Lopes",
     userEmail: "fernando.lopes@cultive.com",
@@ -495,6 +526,7 @@ const MockProducts = [
     registrationDate: "2025-09-29T08:00:00",
     lastUpdate: "2025-10-01T09:00:00",
     available: true,
+    isFeatured: false,
     imageUrl: "https://www.hortas.info/wp-content/uploads/2020/06/salsa.jpg",
     userName: "Juliana Teixeira",
     userEmail: "juliana.teixeira@cultive.com",
@@ -509,6 +541,7 @@ const MockProducts = [
     registrationDate: "2025-09-28T10:00:00",
     lastUpdate: "2025-09-30T11:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.hortas.info/wp-content/uploads/2020/06/cebolinha.jpg",
     userName: "Rafael Almeida",
@@ -524,6 +557,7 @@ const MockProducts = [
     registrationDate: "2025-09-27T09:00:00",
     lastUpdate: "2025-09-29T10:00:00",
     available: true,
+    isFeatured: false,
     imageUrl: "https://www.hortas.info/wp-content/uploads/2020/06/geleia.jpg",
     userName: "Amanda Farias",
     userEmail: "amanda.farias@cultive.com",
@@ -538,6 +572,7 @@ const MockProducts = [
     registrationDate: "2025-09-26T08:00:00",
     lastUpdate: "2025-09-28T09:00:00",
     available: true,
+    isFeatured: false,
     imageUrl: "https://www.hortas.info/wp-content/uploads/2020/06/manteiga.jpg",
     userName: "Rodrigo Lima",
     userEmail: "rodrigo.lima@cultive.com",
@@ -552,6 +587,7 @@ const MockProducts = [
     registrationDate: "2025-09-25T10:00:00",
     lastUpdate: "2025-09-27T11:00:00",
     available: true,
+    isFeatured: false,
     imageUrl: "https://www.hortas.info/wp-content/uploads/2020/06/iogurte.jpg",
     userName: "Beatriz Cunha",
     userEmail: "beatriz.cunha@cultive.com",
@@ -566,6 +602,7 @@ const MockProducts = [
     registrationDate: "2025-09-24T09:00:00",
     lastUpdate: "2025-09-26T10:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.hortas.info/wp-content/uploads/2020/06/queijo-minas.jpg",
     userName: "Carlos Henrique",
@@ -581,6 +618,7 @@ const MockProducts = [
     registrationDate: "2025-09-23T08:00:00",
     lastUpdate: "2025-09-25T09:00:00",
     available: true,
+    isFeatured: false,
     imageUrl: "https://www.hortas.info/wp-content/uploads/2020/06/leite.jpg",
     userName: "Tatiana Silva",
     userEmail: "tatiana.silva@cultive.com",
@@ -595,6 +633,7 @@ const MockProducts = [
     registrationDate: "2025-09-22T09:00:00",
     lastUpdate: "2025-09-24T10:00:00",
     available: true,
+    isFeatured: false,
     imageUrl: "https://www.hortas.info/wp-content/uploads/2020/06/ovos.jpg",
     userName: "Marcelo Torres",
     userEmail: "marcelo.torres@cultive.com",
@@ -609,6 +648,7 @@ const MockProducts = [
     registrationDate: "2025-09-21T10:00:00",
     lastUpdate: "2025-09-23T11:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.hortas.info/wp-content/uploads/2020/06/requeijao.jpg",
     userName: "Elaine Barbosa",
@@ -624,6 +664,7 @@ const MockProducts = [
     registrationDate: "2025-09-20T08:00:00",
     lastUpdate: "2025-09-22T09:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.hortas.info/wp-content/uploads/2020/06/creme-de-leite.jpg",
     userName: "Renato Oliveira",
@@ -639,6 +680,7 @@ const MockProducts = [
     registrationDate: "2025-10-01T09:00:00",
     lastUpdate: "2025-10-03T10:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.hortas.info/wp-content/uploads/2020/06/muda-manjericao.jpg",
     userName: "Bruna Almeida",
@@ -654,6 +696,7 @@ const MockProducts = [
     registrationDate: "2025-09-30T08:00:00",
     lastUpdate: "2025-10-02T09:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.hortas.info/wp-content/uploads/2020/06/muda-tomate.jpg",
     userName: "Eduardo Santos",
@@ -669,6 +712,7 @@ const MockProducts = [
     registrationDate: "2025-09-29T10:00:00",
     lastUpdate: "2025-10-01T11:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.hortas.info/wp-content/uploads/2020/06/muda-alface.jpg",
     userName: "Fernanda Ribeiro",
@@ -684,6 +728,7 @@ const MockProducts = [
     registrationDate: "2025-09-28T09:00:00",
     lastUpdate: "2025-09-30T10:00:00",
     available: true,
+    isFeatured: false,
     imageUrl:
       "https://www.hortas.info/wp-content/uploads/2020/06/muda-hortela.jpg",
     userName: "Luana Costa",

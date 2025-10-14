@@ -34,6 +34,7 @@ export default function HomeScreen({ navigation }) {
   const lastPurchases = products.slice(0, 5);
 
   const filteredProduct = MockProducts.filter((p) =>
+    p.isFeatured &&
     p.name.toLowerCase().includes(search.toLowerCase())
   );
 
