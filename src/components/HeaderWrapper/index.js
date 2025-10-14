@@ -3,16 +3,21 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../../constants/colors";
 
 export default function HeaderWrapper({ navigation, title }) {
+  const isCentered = !navigation;
+
   return (
-    <View style={styles.header}>
+    <View style={[styles.header, isCentered && { justifyContent: "center" }]}>
       <Text style={styles.logoText}>{title}</Text>
-      <TouchableOpacity style={styles.btnHeader} onPress={navigation}>
-        <MaterialCommunityIcons
-          name="close"
-          size={24}
-          color={colors.textWhite}
-        />
-      </TouchableOpacity>
+
+      {!isCentered && (
+        <TouchableOpacity style={styles.btnHeader} onPress={navigation}>
+          <MaterialCommunityIcons
+            name="close"
+            size={24}
+            color={colors.secondary}
+          />
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -26,10 +31,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   logoText: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "900",
     textAlign: "center",
-    color: colors.textWhite,
+    color: colors.primary,
   },
   btnHeader: {
     width: 40,

@@ -2,9 +2,9 @@ import { StyleSheet, TextInput, View } from "react-native";
 import colors from "../../constants/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default function SearchButton({ value, onChangeText, placeholder }) {
+export default function SearchButton({ value, onChangeText, placeholder, colorIcon, style }) {
   return (
-    <View style={styles.searchBox}>
+    <View style={[styles.searchBox, style]}>
       <TextInput
         style={styles.searchInput}
         placeholder={placeholder}
@@ -15,7 +15,7 @@ export default function SearchButton({ value, onChangeText, placeholder }) {
       <MaterialCommunityIcons
         name="magnify"
         size={24}
-        color={colors.secondary}
+        color={colorIcon}
       />
     </View>
   );
@@ -25,8 +25,9 @@ const styles = StyleSheet.create({
   searchBox: {
     flexDirection: "row",
     alignItems: "center",
+    marginTop: 10,
+    marginBottom: 20,
     backgroundColor: colors.surface,
-    margin: 16,
     paddingHorizontal: 12,
     borderRadius: 10,
     borderWidth: 1,
