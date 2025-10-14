@@ -1,11 +1,20 @@
-import { Modal, Text, TouchableOpacity, View, FlatList } from "react-native";
+import {
+  Modal,
+  Text,
+  TouchableOpacity,
+  View,
+  FlatList,
+  TextInput,
+} from "react-native";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../../../constants/colors";
 import styles from "../styles/addressModalStyle";
 import SearchButton from "../../../components/SearchButton";
 import { useState } from "react";
-import ModalWrapper from "../../../components/ModalWrapper";
 import Button from "../../../components/Button";
+import ModalAddAddress from "../modals/ModalAddAddress";
+import ModalOptions from "../modals/ModalOptions";
+import ModalEditAddress from "../modals/ModalEditAddress";
 
 const mockAddresses = [
   {
@@ -34,18 +43,22 @@ const mockAddresses = [
 export default function AddressModal({ visible, onClose, onSelectAddress }) {
   const [valueSearch, setValueSearch] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-  const [optionsVisible, setOptionsVisible] = useState(false);
+  const [addresses, setAddresses] = useState(mockAddresses);
+  const [editMode, setEditMode] = useState(false);
+  const [editData, setEditData] = useState(null);
   const [addressInFocus, setAddressInFocus] = useState(null);
+  const [optionsVisible, setOptionsVisible] = useState(false);
+  const [addModalVisble, setAddModalVisible] = useState(false);
 
   const handleSelect = (id) => {
     setSelectedId(id);
-    const selected = mockAddresses.find((addr) => addr.id === id);
+    const selected = addresses.find((addr) => addr.id === id);
     if (selected) {
       onSelectAddress(selected.street);
     }
   };
 
-  const filteredAddresses = mockAddresses.filter((addr) =>
+  const filteredAddresses = addresses.filter((addr) =>
     addr.street.toLowerCase().includes(valueSearch.toLowerCase())
   );
 
@@ -56,6 +69,32 @@ export default function AddressModal({ visible, onClose, onSelectAddress }) {
 
   const closeOptions = () => {
     setAddressInFocus(null);
+    setOptionsVisible(false);
+  };
+
+  const handleSave = (newAddress) => {
+    const nextId = addresses.length + 1;
+    const formatted = {
+      id: nextId,
+      street: `${newAddress.street}, ${newAddress.number}`,
+      city: newAddress.city,
+      zipCode: newAddress.zipCode,
+      country: newAddress.country,
+    };
+    setAddresses((prev) => [...prev, formatted]);
+    setAddModalVisible(false);
+  };
+
+  const handleEdit = () => {
+    setEditData(addressInFocus);
+    setEditMode(true);
+    setOptionsVisible(false);
+  };
+
+  const handleDelete = () => {
+    setAddresses((prev) =>
+      prev.filter((addr) => addr.id !== addressInFocus.id)
+    );
     setOptionsVisible(false);
   };
 
@@ -128,7 +167,7 @@ export default function AddressModal({ visible, onClose, onSelectAddress }) {
             />
 
             <Button
-              onPress={""}
+              onPress={() => setAddModalVisible(true)}
               label={"Cadastrar novo endereço"}
               icon={
                 <MaterialIcons
@@ -144,40 +183,42 @@ export default function AddressModal({ visible, onClose, onSelectAddress }) {
           </View>
         </View>
 
-        {/* Options Modal */}
-        <ModalWrapper
+        <ModalOptions
           visible={optionsVisible}
-          titleHeader={addressInFocus?.street}
-        >
-          <View style={styles.contentOption}>
-            <TouchableOpacity style={styles.optionBtn}>
-              <MaterialCommunityIcons
-                name="pencil"
-                size={18}
-                color={colors.textDark}
-              />
-              <Text style={styles.optionText}>Editar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.optionBtn}>
-              <MaterialCommunityIcons
-                name="trash-can"
-                size={18}
-                color={colors.textDark}
-              />
-              <Text style={styles.optionText}>Excluir</Text>
-            </TouchableOpacity>
-          </View>
+          onClose={() => setOptionsVisible(false)}
+          title={addressInFocus?.street}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+        />
 
-          <TouchableOpacity style={styles.cancelBtn} onPress={closeOptions}>
-            <Text
-              style={[
-                { color: colors.textMuted, fontSize: 16, color: colors.danger },
-              ]}
-            >
-              Cancelar
-            </Text>
-          </TouchableOpacity>
-        </ModalWrapper>
+        <ModalAddAddress
+          visible={addModalVisble}
+          onClose={() => setAddModalVisible(false)}
+          handle={handleSave}
+        />
+
+        <ModalEditAddress
+          address={editData}
+          visible={editMode}
+          onClose={() => setEditMode(false)}
+          onSave={(updated) => {
+            setAddresses((prev) =>
+              prev.map((addr) =>
+                addr.id === addressInFocus.id
+                  ? {
+                      ...addr,
+                      street: `${updated.street}, ${updated.number}`,
+                      city: updated.city,
+                      zipCode: updated.zipCode,
+                      country: updated.country,
+                    }
+                  : addr
+              )
+            );
+            setEditMode(false);
+            setEditData(null);
+          }}
+        />
       </View>
     </Modal>
   );

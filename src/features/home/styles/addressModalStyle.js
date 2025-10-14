@@ -68,45 +68,6 @@ const styles = StyleSheet.create({
     right: 12,
     position: "absolute",
   },
-  contentOption: {
-    padding: 16,
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  optionsBox: {
-    backgroundColor: colors.background,
-    padding: 16,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-  },
-  optionsTitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 12,
-    color: colors.textDark,
-  },
-  optionBtn: {
-    width: 130,
-    height: 50,
-    paddingHorizontal: 12,
-    paddingVertical: 12,
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "center",
-    gap: 5,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: colors.border,
-  },
-  optionText: {
-    fontSize: 15,
-    color: colors.textDark,
-    fontWeight: "500",
-  },
-  cancelBtn: {
-    marginVertical: 20,
-    alignItems: "center",
-  },
 });
 
 export default styles;
