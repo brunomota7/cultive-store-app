@@ -13,10 +13,10 @@ export default function LoginScreen({ navigation }) {
   const [error, setError] = useState("");
 
   const handleLogin = () => {
-    if (!email || password.length < 6) {
+/*     if (!email || password.length < 6) {
       setError("E-mail ou senha inválidos");
       return;
-    }
+    } */
     setError("");
     navigation.navigate("Home");
   };
