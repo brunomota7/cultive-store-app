@@ -8,9 +8,27 @@ import ModalWrapper from "../../../components/ModalWrapper";
 import Button from "../../../components/Button";
 
 const mockAddresses = [
-  { id: 1, street: "R. dos Cedros, 12" },
-  { id: 2, street: "Av. Brasil, 1050" },
-  { id: 3, street: "Rua das Flores, 88" },
+  {
+    id: 1,
+    street: "R. dos Cedros, 12",
+    city: "Viana",
+    zipCode: "65215-000",
+    country: "Brasil",
+  },
+  {
+    id: 2,
+    street: "Av. Brasil, 1050",
+    city: "Viana",
+    zipCode: "65215-000",
+    country: "Brasil",
+  },
+  {
+    id: 3,
+    street: "Rua das Flores, 88",
+    city: "Viana",
+    zipCode: "65215-000",
+    country: "Brasil",
+  },
 ];
 
 export default function AddressModal({ visible, onClose, onSelectAddress }) {
@@ -75,13 +93,17 @@ export default function AddressModal({ visible, onClose, onSelectAddress }) {
                     ]}
                     onPress={() => handleSelect(item.id)}
                   >
+                    <MaterialIcons
+                      name="place"
+                      size={20}
+                      color={colors.textMuted}
+                    />
                     <View style={styles.addressInfo}>
-                      <MaterialIcons
-                        name="place"
-                        size={20}
-                        color={colors.textMuted}
-                      />
                       <Text style={styles.addressText}>{item.street}</Text>
+                      <Text style={styles.addressText}>
+                        {item.city} • {item.zipCode}
+                      </Text>
+                      <Text style={styles.addressText}>{item.country}</Text>
                     </View>
 
                     <View style={styles.cardActions}>

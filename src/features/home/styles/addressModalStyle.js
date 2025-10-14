@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
   addressCard: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     alignItems: "center",
     padding: 12,
     marginVertical: 6,
@@ -51,8 +51,10 @@ const styles = StyleSheet.create({
     borderColor: colors.success,
   },
   addressInfo: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    marginLeft: 30,
   },
   addressText: {
     marginLeft: 8,
@@ -63,6 +65,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
+    right: 12,
+    position: "absolute",
   },
   contentOption: {
     padding: 16,

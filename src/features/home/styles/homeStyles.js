@@ -31,6 +31,26 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     paddingHorizontal: 4,
   },
+  banner: {
+    backgroundColor: colors.surface,
+    padding: 16,
+    marginHorizontal: 16,
+    borderRadius: 12,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  bannerTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: colors.primary,
+    marginBottom: 4,
+  },
+  bannerText: {
+    fontSize: 14,
+    color: colors.textMuted,
+  },
+
   categoryButton: {
     backgroundColor: colors.surface,
     paddingVertical: 10,
