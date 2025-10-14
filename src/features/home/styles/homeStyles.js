@@ -15,15 +15,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingHorizontal: 16,
   },
-  username: {
-    fontSize: 15,
-    marginBottom: 6,
-    fontWeight: "700",
-  },
-  btnAddress: {
-    flexDirection: "row",
-    gap: 6,
-  },
   sectionTitle: {
     fontSize: 16,
     fontWeight: "bold",

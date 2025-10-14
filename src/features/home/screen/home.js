@@ -29,8 +29,8 @@ const user = {
 export default function HomeScreen({ navigation }) {
   const [products, setProducts] = useState(MockProducts);
   const [search, setSearch] = useState("");
-  const [selectedAddress, setSelectedAddress] = useState(user.address);
-  const [modalVisible, setModalVisible] = useState(false);
+  //const [selectedAddress, setSelectedAddress] = useState(user.address);
+  //const [modalVisible, setModalVisible] = useState(false);
 
   const lastPurchases = products.slice(0, 5);
 
@@ -46,29 +46,15 @@ export default function HomeScreen({ navigation }) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <ScrollView style={styles.content}>
+
+          {/* Header */}
           <HeaderHome navigation={() => navigation.openDrawer()} />
 
-          <View
-            style={[
-              styles.section,
-              { flexDirection: "row", justifyContent: "space-between" },
-            ]}
-          >
-            <Text style={styles.username}>Olá, {user.name}</Text>
+          {/* Slide */}
+          <Onboarding /> 
 
-            <TouchableOpacity
-              style={styles.btnAddress}
-              onPress={() => setModalVisible(true)}
-            >
-              <MaterialIcons name="expand-more" size={18} color={colors.zinc} />
-              <Text>{selectedAddress}</Text>
-            </TouchableOpacity>
-          </View>
-
-          <Onboarding />
-          
-          <CategoryCard />
-
+          {/* Categorys */}
+          <CategoryCard /> 
 
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Últimas compras</Text>
@@ -119,15 +105,6 @@ export default function HomeScreen({ navigation }) {
             </TouchableOpacity>
           ))}
         </ScrollView>
-
-        <AddressModal
-          visible={modalVisible}
-          onClose={() => setModalVisible(false)}
-          onSelectAddress={(address) => {
-            setSelectedAddress(address);
-            setModalVisible(false);
-          }}
-        />
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
