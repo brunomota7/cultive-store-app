@@ -91,36 +91,35 @@ export default function HomeScreen({ navigation }) {
             </ScrollView>
           </View>
 
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Produtos em destaque</Text>
-            <SearchButton
-              value={search}
-              onChangeText={setSearch}
-              placeholder={"Buscar produto..."}
-              colorIcon={colors.secondary}
-            />
-          </View>
+          <Text style={[styles.sectionTitle, { marginHorizontal: 16 }]}>Produtos em destaque</Text>
+          <SearchButton
+            value={search}
+            onChangeText={setSearch}
+            placeholder={"Buscar produto..."}
+            colorIcon={colors.secondary}
+            style={{
+              marginHorizontal: 16 
+            }}
+          />
 
-          <View style={styles.section}>
-            {filteredProduct.map((item) => (
-              <TouchableOpacity
-                key={item.productId}
-                style={styles.productCard}
-                onPress={() => console.log("Abrir detalhes")}
-              >
-                <Image
-                  source={{ uri: item.imageUrl }}
-                  style={styles.productImage}
-                />
-                <View style={styles.productInfo}>
-                  <Text style={styles.productName}>{item.name}</Text>
-                  <Text style={styles.productPrice}>
-                    R$ {item.price.toFixed(2)}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </View>
+          {filteredProduct.map((item) => (
+            <TouchableOpacity
+              key={item.productId}
+              style={[styles.productCard, { marginHorizontal: 16 }]}
+              onPress={() => console.log("Abrir detalhes")}
+            >
+              <Image
+                source={{ uri: item.imageUrl }}
+                style={styles.productImage}
+              />
+              <View style={styles.productInfo}>
+                <Text style={styles.productName}>{item.name}</Text>
+                <Text style={styles.productPrice}>
+                  R$ {item.price.toFixed(2)}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          ))}
         </ScrollView>
 
         <AddressModal

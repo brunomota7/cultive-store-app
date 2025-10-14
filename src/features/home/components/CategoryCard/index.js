@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   title: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "700",
     marginBottom: 12,
     color: colors.textDark,
