@@ -19,6 +19,7 @@ import CategoryCard from "../components/CategoryCard";
 import { MaterialIcons } from "@expo/vector-icons";
 import AddressModal from "./addressModal";
 import colors from "../../../constants/colors";
+import Onboarding from "../../../components/Onboarding";
 
 const user = {
   name: "Bruno",
@@ -64,14 +65,10 @@ export default function HomeScreen({ navigation }) {
             </TouchableOpacity>
           </View>
 
-          <View style={styles.banner}>
-            <Text style={styles.bannerTitle}>Por que o Cultive existe?</Text>
-            <Text style={styles.bannerText}>
-              Conectamos você ao campo com qualidade e propósito.
-            </Text>
-          </View>
-
+          <Onboarding />
+          
           <CategoryCard />
+
 
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Últimas compras</Text>
