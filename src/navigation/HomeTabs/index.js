@@ -2,11 +2,14 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HomeScreen from "../../features/home/screen/home";
 import colors from "../../constants/colors";
-import { Platform } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
 
 const Tab = createBottomTabNavigator();
 
 export default function HomeTabs() {
+  const [notificationCount, setNotificationCount] = useState(3);
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -19,7 +22,7 @@ export default function HomeTabs() {
         },
         tabBarStyle: {
           height: 70,
-          paddingBottom: 8,
+          paddingBottom: 40,
           paddingTop: 6,
           borderTopWidth: 1,
           borderTopColor: colors.border,
@@ -40,7 +43,11 @@ export default function HomeTabs() {
         options={{
           tabBarLabel: "Início",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home-outline" color={color} size={24} />
+            <MaterialCommunityIcons
+              name="home-outline"
+              color={color}
+              size={24}
+            />
           ),
         }}
       />
@@ -50,7 +57,32 @@ export default function HomeTabs() {
         options={{
           tabBarLabel: "Compras",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="cart-outline" color={color} size={24} />
+            <MaterialCommunityIcons
+              name="cart-outline"
+              color={color}
+              size={24}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Notificacoes"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: "Notificações",
+          tabBarIcon: ({ color }) => (
+            <View style={{ position: "relative" }}>
+              <MaterialCommunityIcons
+                name="bell-outline"
+                size={24}
+                color={color}
+              />
+              {notificationCount > 0 && (
+                <View style={styles.badge}>
+                  <Text style={styles.badgeText}>{notificationCount}</Text>
+                </View>
+              )}
+            </View>
           ),
         }}
       />
@@ -60,10 +92,35 @@ export default function HomeTabs() {
         options={{
           tabBarLabel: "Perfil",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account-outline" color={color} size={24} />
+            <MaterialCommunityIcons
+              name="account-outline"
+              color={color}
+              size={24}
+            />
           ),
         }}
       />
     </Tab.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  badge: {
+    position: "absolute",
+    top: -4,
+    right: -6,
+    backgroundColor: colors.danger,
+    borderRadius: 10,
+    paddingHorizontal: 5,
+    paddingVertical: 1,
+    minWidth: 16,
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 10,
+  },
+  badgeText: {
+    color: colors.textWhite,
+    fontSize: 10,
+    fontWeight: "bold",
+  },
+});
