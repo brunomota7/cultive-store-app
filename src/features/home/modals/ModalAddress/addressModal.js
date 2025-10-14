@@ -7,14 +7,14 @@ import {
   TextInput,
 } from "react-native";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
-import colors from "../../../constants/colors";
-import styles from "../styles/addressModalStyle";
-import SearchButton from "../../../components/SearchButton";
+import colors from "../../../../constants/colors";
+import styles from "./addressModalStyle";
+import SearchButton from "../../../../components/SearchButton/index";
 import { useState } from "react";
-import Button from "../../../components/Button";
-import ModalAddAddress from "../modals/ModalAddAddress";
-import ModalOptions from "../modals/ModalOptions";
-import ModalEditAddress from "../modals/ModalEditAddress";
+import Button from "../../../../components/Button/index";
+import ModalAddAddress from "../ModalAddAddress";
+import ModalOptions from "../ModalOptions/index";
+import ModalEditAddress from "../ModalEditAddress/index";
 
 const mockAddresses = [
   {

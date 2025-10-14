@@ -10,8 +10,8 @@ import {
   View,
 } from "react-native";
 import colors from "../../../../constants/colors";
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
-import AddressModal from "../../screen/addressModal";
+import { MaterialIcons } from "@expo/vector-icons";
+import AddressModal from "../../modals/ModalAddress/addressModal";
 
 const user = {
   name: "Bruno",
@@ -20,7 +20,6 @@ const user = {
 
 export default function HeaderHome({ navigation }) {
   const fadeAnim = useRef(new Animated.Value(0)).current;
-  const [notificationCount, setNotificationCount] = useState(3);
   const [selectedAddress, setSelectedAddress] = useState(user.address);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -42,7 +41,7 @@ export default function HeaderHome({ navigation }) {
         style={styles.btnAddress}
         onPress={() => setModalVisible(true)}
       >
-        <MaterialIcons name="expand-more" size={18} color={colors.zinc} />
+        <MaterialIcons name="expand-more" size={20} color={colors.primary} />
         <Text>{selectedAddress}</Text>
       </TouchableOpacity>
 
@@ -88,6 +87,13 @@ const styles = StyleSheet.create({
   },
   btnAddress: {
     flexDirection: "row",
-    gap: 6,
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 5,
+    padding: 5,
+    borderWidth: 0.9,
+    borderColor: colors.border,
+    borderRadius: 8,
+    backgroundColor: colors.surface,
   },
 });

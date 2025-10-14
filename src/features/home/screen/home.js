@@ -17,7 +17,7 @@ import styles from "../styles/homeStyles";
 import MockProducts from "../../../constants/mockProducts";
 import CategoryCard from "../components/CategoryCard";
 import { MaterialIcons } from "@expo/vector-icons";
-import AddressModal from "./addressModal";
+import AddressModal from "../modals/ModalAddress/addressModal";
 import colors from "../../../constants/colors";
 import Onboarding from "../../../components/Onboarding";
 
@@ -29,8 +29,6 @@ const user = {
 export default function HomeScreen({ navigation }) {
   const [products, setProducts] = useState(MockProducts);
   const [search, setSearch] = useState("");
-  //const [selectedAddress, setSelectedAddress] = useState(user.address);
-  //const [modalVisible, setModalVisible] = useState(false);
 
   const lastPurchases = products.slice(0, 5);
 
