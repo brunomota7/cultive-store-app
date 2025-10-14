@@ -12,6 +12,7 @@ import ValidateCode from "./src/features/auth/forgotPassword/screen/validateCode
 import ChangePassword from "./src/features/auth/forgotPassword/screen/changePassword";
 import HomeScreen from "./src/features/home/screen/home";
 import HomeTabs from "./src/navigation/HomeTabs";
+import ProductScreenByCategory from "./src/features/home/components/ProductWrapper";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +35,7 @@ export default function App() {
           <Stack.Screen name="ChangePassword" component={ChangePassword} />
 
           <Stack.Screen name="Home" component={HomeTabs} />
+           <Stack.Screen name="ProductScreenByCategory" component={ProductScreenByCategory} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

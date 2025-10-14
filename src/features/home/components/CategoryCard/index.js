@@ -7,6 +7,7 @@ import {
   View,
 } from "react-native";
 import colors from "../../../../constants/colors";
+import { useNavigation } from "@react-navigation/native";
 
 const categories = [
   { id: 1, name: "Hortaliças", icon: "leaf", catPage: "HORTALICAS" },
@@ -25,7 +26,9 @@ const categories = [
   { id: 9, name: "Plantas e Mudas", icon: "flower", catPage: "PLANTAS_MUDAS" },
 ];
 
-export default function CategoryCard({ navigation }) {
+export default function CategoryCard() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Categorias</Text>
