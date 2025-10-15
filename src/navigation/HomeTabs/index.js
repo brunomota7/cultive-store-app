@@ -4,10 +4,13 @@ import HomeScreen from "../../features/home/screen/home";
 import colors from "../../constants/colors";
 import { Platform, StyleSheet, Text, View } from "react-native";
 import { useState } from "react";
+import { useCart } from "../../context/cartContext";
+import CartScreen from "../../features/cart/screen/cartScreen";
 
 const Tab = createBottomTabNavigator();
 
 export default function HomeTabs() {
+  const { totalItems } = useCart();
   const [notificationCount, setNotificationCount] = useState(3);
 
   return (
@@ -52,19 +55,27 @@ export default function HomeTabs() {
         }}
       />
       <Tab.Screen
-        name="Compras"
-        component={HomeScreen}
+        name="Cart"
+        component={CartScreen}
         options={{
-          tabBarLabel: "Compras",
+          tabBarLabel: "Carrinho",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="cart-outline"
-              color={color}
-              size={24}
-            />
+            <View style={{ position: "relative" }}>
+              <MaterialCommunityIcons
+                name="cart-outline"
+                size={24}
+                color={color}
+              />
+              {totalItems > 0 && (
+                <View style={styles.badge}>
+                  <Text style={styles.badgeText}>{totalItems}</Text>
+                </View>
+              )}
+            </View>
           ),
         }}
       />
+
       <Tab.Screen
         name="Notificacoes"
         component={HomeScreen}

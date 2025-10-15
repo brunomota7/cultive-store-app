@@ -2,11 +2,11 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../../constants/colors";
 
-export default function HeaderWrapper({ navigation, title }) {
+export default function HeaderWrapper({ navigation, title, style }) {
   const isCentered = !navigation;
 
   return (
-    <View style={[styles.header, isCentered && { justifyContent: "center" }]}>
+    <View style={[styles.header, isCentered && { justifyContent: "center" }, style]}>
       <Text style={styles.logoText}>{title}</Text>
 
       {!isCentered && (

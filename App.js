@@ -1,4 +1,3 @@
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -13,32 +12,38 @@ import ChangePassword from "./src/features/auth/forgotPassword/screen/changePass
 import HomeTabs from "./src/navigation/HomeTabs";
 import ProductScreenByCategory from "./src/features/home/components/ProductWrapper";
 import ProductDetails from "./src/features/product/screen/productDetails";
+import { CartProvider } from "./src/context/cartContext";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{ headerShown: false }}
-          initialRouteName="Splash"
-        >
-          <Stack.Screen name="Splash" component={SplashScreen} />
+      <CartProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{ headerShown: false }}
+            initialRouteName="Splash"
+          >
+            <Stack.Screen name="Splash" component={SplashScreen} />
 
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="Register" component={RegisterScreen} />
-          <Stack.Screen name="FacebookAuth" component={FacebookScreen} />
-          <Stack.Screen name="GoogleAuth" component={GoogleScreen} />
-          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-          <Stack.Screen name="ValidateCode" component={ValidateCode} />
-          <Stack.Screen name="ChangePassword" component={ChangePassword} />
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="FacebookAuth" component={FacebookScreen} />
+            <Stack.Screen name="GoogleAuth" component={GoogleScreen} />
+            <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+            <Stack.Screen name="ValidateCode" component={ValidateCode} />
+            <Stack.Screen name="ChangePassword" component={ChangePassword} />
 
-          <Stack.Screen name="Home" component={HomeTabs} />
-          <Stack.Screen name="ProductScreenByCategory" component={ProductScreenByCategory} />
-          <Stack.Screen name="ProductDetails" component={ProductDetails} />
-        </Stack.Navigator>
-      </NavigationContainer>
+            <Stack.Screen name="Home" component={HomeTabs} />
+            <Stack.Screen
+              name="ProductScreenByCategory"
+              component={ProductScreenByCategory}
+            />
+            <Stack.Screen name="ProductDetails" component={ProductDetails} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </CartProvider>
     </SafeAreaProvider>
   );
 }

@@ -1,10 +1,18 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import colors from "../../constants/colors";
+import { useCart } from "../../context/cartContext";
 
 export default function FloatingButton({ onPress, icon, style }) {
+  const { totalItems } = useCart();
+
   return (
     <TouchableOpacity style={[styles.floatingButton, style]} onPress={onPress}>
       {icon}
+      {totalItems > 0 && (
+        <View style={styles.badge}>
+          <Text style={styles.badgeText}>{totalItems}</Text>
+        </View>
+      )}
     </TouchableOpacity>
   );
 }
@@ -25,5 +33,22 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     shadowOffset: { width: 0, height: 3 },
     elevation: 4,
+  },
+  badge: {
+    position: "absolute",
+    top: -4,
+    right: -4,
+    backgroundColor: colors.danger,
+    borderRadius: 10,
+    paddingHorizontal: 5,
+    paddingVertical: 1,
+    minWidth: 16,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  badgeText: {
+    color: colors.textWhite,
+    fontSize: 10,
+    fontWeight: "bold",
   },
 });

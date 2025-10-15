@@ -1,16 +1,26 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, Image, ScrollView } from "react-native";
 import HeaderWrapper from "../../../components/HeaderWrapper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../../../constants/colors";
 import styles from "../styles/productDetailStyles";
 import Button from "../../../components/Button";
 import { formatDate, formtCategory } from "../../../utils/utils";
+import FloatingButton from "../../../components/FloatingButton";
+import { useCart } from "../../../context/cartContext";
+import { useState } from "react";
+import CartModal from "../../cart/screen/cartModal";
 
 export default function ProductDetails() {
   const route = useRoute();
   const navigation = useNavigation();
   const { product } = route.params;
+  const { addToCart } = useCart();
+  const [cartVisible, setCartVisible] = useState(false);
+
+  const handleAddToCart = () => {
+    addToCart(product);
+  };
 
   return (
     <View style={styles.container}>
@@ -116,9 +126,23 @@ export default function ProductDetails() {
               color={colors.textWhite}
             />
           }
-          onPress={""}
+          onPress={handleAddToCart}
         />
       </ScrollView>
+
+      <FloatingButton 
+        icon={<MaterialCommunityIcons name="cart" size={20} color={colors.textWhite} />}
+        onPress={() => setCartVisible(true)}
+      />
+
+      <CartModal 
+        visible={cartVisible}
+        onClose={() => setCartVisible(false)}
+        onCheckout={() => {
+          setCartVisible(false);
+          navigation.navigate("ConfirmAddress");
+        }}
+      />
     </View>
   );
 }
