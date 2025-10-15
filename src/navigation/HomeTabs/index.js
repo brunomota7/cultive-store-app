@@ -3,16 +3,17 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HomeScreen from "../../features/home/screen/home";
 import colors from "../../constants/colors";
 import { Platform, StyleSheet, Text, View } from "react-native";
-import { useState } from "react";
 import { useCart } from "../../context/cartContext";
 import CartScreen from "../../features/cart/screen/cartScreen";
 import Profile from "../../features/profile/screen/profileScreen";
+import NotificationScreen from "../../features/notifications/screen/notification";
+import { useNotifications } from "../../context/notificationContext";
 
 const Tab = createBottomTabNavigator();
 
 export default function HomeTabs() {
   const { totalItems } = useCart();
-  const [notificationCount, setNotificationCount] = useState(3);
+  const { unreadCount } = useNotifications();
 
   return (
     <Tab.Navigator
@@ -79,7 +80,7 @@ export default function HomeTabs() {
 
       <Tab.Screen
         name="Notificacoes"
-        component={HomeScreen}
+        component={NotificationScreen}
         options={{
           tabBarLabel: "Notificações",
           tabBarIcon: ({ color }) => (
@@ -89,9 +90,9 @@ export default function HomeTabs() {
                 size={24}
                 color={color}
               />
-              {notificationCount > 0 && (
+              {unreadCount > 0 && (
                 <View style={styles.badge}>
-                  <Text style={styles.badgeText}>{notificationCount}</Text>
+                  <Text style={styles.badgeText}>{unreadCount}</Text>
                 </View>
               )}
             </View>

@@ -1,3 +1,5 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import colors from "../constants/colors";
 
 export const formatDate = (date) => {
   if (!date) return "";
@@ -23,4 +25,17 @@ export const formtCategory = (rawCategory) => {
     categoryMap[rawCategory.toUpperCase()] || rawCategory.toLowerCase();
 
   return formatted.charAt(0).toUpperCase() + formatted.slice(1);
+};
+
+export const getIcon = (type) => {
+  switch (type) {
+    case "success":
+      return <MaterialCommunityIcons name="check-circle" size={20} color={colors.success} />;
+    case "warning":
+      return <MaterialCommunityIcons name="alert-circle" size={20} color={colors.warning} />;
+    case "erro":
+      return <MaterialCommunityIcons name="cancel" size={20} color={colors.danger} />;
+    default:
+      return <MaterialCommunityIcons name="notifications" size={20} color={colors.primary} />
+  }
 };

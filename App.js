@@ -15,39 +15,45 @@ import ProductDetails from "./src/features/product/screen/productDetails";
 import { CartProvider } from "./src/context/cartContext";
 import ConfirmAddressScreen from "./src/features/checkOutBuy/screen/confirmAddressScreen";
 import Payment from "./src/features/checkOutBuy/screen/paymentScreen";
+import { NotificationProvider } from "./src/context/notificationContext";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <SafeAreaProvider>
-      <CartProvider>
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{ headerShown: false }}
-            initialRouteName="Splash"
-          >
-            <Stack.Screen name="Splash" component={SplashScreen} />
+      <NotificationProvider>
+        <CartProvider>
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{ headerShown: false }}
+              initialRouteName="Splash"
+            >
+              <Stack.Screen name="Splash" component={SplashScreen} />
 
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Register" component={RegisterScreen} />
-            <Stack.Screen name="FacebookAuth" component={FacebookScreen} />
-            <Stack.Screen name="GoogleAuth" component={GoogleScreen} />
-            <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-            <Stack.Screen name="ValidateCode" component={ValidateCode} />
-            <Stack.Screen name="ChangePassword" component={ChangePassword} />
+              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Register" component={RegisterScreen} />
+              <Stack.Screen name="FacebookAuth" component={FacebookScreen} />
+              <Stack.Screen name="GoogleAuth" component={GoogleScreen} />
+              <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+              <Stack.Screen name="ValidateCode" component={ValidateCode} />
+              <Stack.Screen name="ChangePassword" component={ChangePassword} />
 
-            <Stack.Screen name="Home" component={HomeTabs} />
-            <Stack.Screen
-              name="ProductScreenByCategory"
-              component={ProductScreenByCategory}
-            />
-            <Stack.Screen name="ProductDetails" component={ProductDetails} />
-            <Stack.Screen name="ConfirmAddress" component={ConfirmAddressScreen} />
-            <Stack.Screen name="Payment" component={Payment} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </CartProvider>
+              <Stack.Screen name="Home" component={HomeTabs} />
+              <Stack.Screen
+                name="ProductScreenByCategory"
+                component={ProductScreenByCategory}
+              />
+              <Stack.Screen name="ProductDetails" component={ProductDetails} />
+              <Stack.Screen
+                name="ConfirmAddress"
+                component={ConfirmAddressScreen}
+              />
+              <Stack.Screen name="Payment" component={Payment} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </CartProvider>
+      </NotificationProvider>
     </SafeAreaProvider>
   );
 }

@@ -7,17 +7,24 @@ import { useState } from "react";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import colors from "../../../constants/colors";
 import { useCart } from "../../../context/cartContext";
+import { useNotifications } from "../../../context/notificationContext";
 
 export default function Payment() {
   const navigation = useNavigation();
   const route = useRoute();
-  const { clearCart } = useCart();
-  const { cartItems, totalPrice, address } = route.params;
-
   const [selectedMethod, setSelectedMethod] = useState(null);
+  const { clearCart } = useCart();
+  const { addNotification } = useNotifications();
+  const { cartItems, totalPrice, address } = route.params;
 
   const handleFinish = () => {
     if (!selectedMethod) return alert("Selecione um método de pagamento");
+
+    addNotification(
+      "success",
+      `Compra realizada com sucesso no valor de R$ ${totalPrice.toFixed(2)}.`
+    );
+
     navigation.navigate("OrderSuccess", {
       address,
       totalPrice,
@@ -28,6 +35,10 @@ export default function Payment() {
 
   const handleCancel = () => {
     clearCart();
+    addNotification(
+      "warning",
+      `Compra de R$ ${totalPrice.toFixed(2)} cancelada.`
+    );
     navigation.navigate("Home");
   };
 
