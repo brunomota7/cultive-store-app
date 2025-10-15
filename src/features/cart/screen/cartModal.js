@@ -77,7 +77,7 @@ export default function CartModal({ visible, onClose, onCheckout }) {
               }}
             />
             <Button
-              label="Prosseguir"
+              label="Finalizar Compra"
               onPress={onCheckout}
               style={{ backgroundColor: colors.success, flex: 1 }}
             />

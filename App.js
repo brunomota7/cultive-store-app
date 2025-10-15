@@ -13,6 +13,7 @@ import HomeTabs from "./src/navigation/HomeTabs";
 import ProductScreenByCategory from "./src/features/home/components/ProductWrapper";
 import ProductDetails from "./src/features/product/screen/productDetails";
 import { CartProvider } from "./src/context/cartContext";
+import ConfirmAddressScreen from "./src/features/checkOutBuy/screen/confirmAddressScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +42,7 @@ export default function App() {
               component={ProductScreenByCategory}
             />
             <Stack.Screen name="ProductDetails" component={ProductDetails} />
+            <Stack.Screen name="ConfirmAddress" component={ConfirmAddressScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </CartProvider>
