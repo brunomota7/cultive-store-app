@@ -1,9 +1,16 @@
 import { useRoute, useNavigation } from "@react-navigation/native";
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  Alert,
+  Clipboard,
+} from "react-native";
 import styles from "../styles/paymentStyles";
 import HeaderWrapper from "../../../components/HeaderWrapper";
 import Button from "../../../components/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import colors from "../../../constants/colors";
 import { useCart } from "../../../context/cartContext";
@@ -16,21 +23,21 @@ export default function Payment() {
   const { clearCart } = useCart();
   const { addNotification } = useNotifications();
   const { cartItems, totalPrice, address } = route.params;
+  const [showPixModal, setShowPixModal] = useState(false);
+  const [pixCode, setPixCode] = useState("00020126580014br.gov.cultive.pix...");
+  const [timeLeft, setTimeLeft] = useState(300);
 
   const handleFinish = () => {
     if (!selectedMethod) return alert("Selecione um método de pagamento");
-
-    addNotification(
-      "success",
-      `Compra realizada com sucesso no valor de R$ ${totalPrice.toFixed(2)}.`
-    );
-
-    navigation.navigate("OrderSuccess", {
-      address,
-      totalPrice,
-      cartItems,
-      paymentMethod: selectedMethod,
-    });
+    if (selectedMethod === "pix") {
+      setShowPixModal(true);
+      setTimeLeft(300);
+    } else {
+      Alert.alert(
+        "Aviso",
+        "Este método de pagamento ainda não está disponível."
+      );
+    }
   };
 
   const handleCancel = () => {
@@ -41,6 +48,12 @@ export default function Payment() {
     );
     navigation.navigate("Home");
   };
+
+  useEffect(() => {
+    if (!showPixModal || timeLeft <= 0) return;
+    const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
+    return () => clearInterval(timer);
+  }, [showPixModal, timeLeft]);
 
   const paymentMethods = [
     {
@@ -53,6 +66,7 @@ export default function Payment() {
           color={colors.secondary}
         />
       ),
+      available: true,
     },
     {
       id: "credit",
@@ -60,6 +74,7 @@ export default function Payment() {
       icon: (
         <FontAwesome5 name="credit-card" size={20} color={colors.secondary} />
       ),
+      available: false,
     },
     {
       id: "debit",
@@ -71,6 +86,7 @@ export default function Payment() {
           color={colors.secondary}
         />
       ),
+      available: false,
     },
   ];
 
@@ -173,7 +189,76 @@ export default function Payment() {
           onPress={handleCancel}
           style={{ backgroundColor: colors.danger, marginTop: 10 }}
         />
+
+        <View style={{ padding: 16 }}>
+          <Text style={{ color: colors.textMuted, fontSize: 12 }}>
+            Pagamento por cartão de crédito e débito estará disponível
+            futuramente.
+          </Text>
+        </View>
       </View>
+
+      {showPixModal && (
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Pagamento via Pix</Text>
+            <View style={styles.qrCodeBox}>
+              <MaterialCommunityIcons
+                name="qrcode"
+                size={120}
+                color={colors.primary}
+              />
+            </View>
+            <Text style={styles.pixCode}>{pixCode}</Text>
+            <TouchableOpacity
+              onPress={() => {
+                Clipboard.setString(pixCode),
+                  Alert.alert("Código Pix copiado.");
+              }}
+            >
+              <Text style={styles.copyText}>Copiar código Pix</Text>
+            </TouchableOpacity>
+            <Text style={styles.timerText}>
+              Tempo restante: {Math.floor(timeLeft / 60)}:
+              {(timeLeft % 60).toString().padStart(2, "0")}
+            </Text>
+            <Button
+              label="Confirmar pagamento"
+              onPress={() => {
+                setShowPixModal(false);
+                addNotification(
+                  "success",
+                  `Compra realizada com sucesso no valor de R$ ${totalPrice.toFixed(
+                    2
+                  )}.`
+                );
+                clearCart();
+                navigation.navigate("OrderSuccess");
+              }}
+            />
+
+            <TouchableOpacity
+              onPress={() => setShowPixModal(false)}
+              style={{
+                width: "100%",
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: 20,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: "500",
+                  color: colors.danger,
+                }}
+              >
+                Cancelar
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
     </View>
   );
 }

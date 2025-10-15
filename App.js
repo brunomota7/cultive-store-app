@@ -16,6 +16,7 @@ import { CartProvider } from "./src/context/cartContext";
 import ConfirmAddressScreen from "./src/features/checkOutBuy/screen/confirmAddressScreen";
 import Payment from "./src/features/checkOutBuy/screen/paymentScreen";
 import { NotificationProvider } from "./src/context/notificationContext";
+import OrderSuccess from "./src/features/checkOutBuy/screen/orderSuccess";
 
 const Stack = createNativeStackNavigator();
 
@@ -50,6 +51,7 @@ export default function App() {
                 component={ConfirmAddressScreen}
               />
               <Stack.Screen name="Payment" component={Payment} />
+              <Stack.Screen name="OrderSuccess" component={OrderSuccess} />
             </Stack.Navigator>
           </NavigationContainer>
         </CartProvider>
