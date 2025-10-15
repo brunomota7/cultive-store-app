@@ -9,7 +9,7 @@ import colors from "../../../constants/colors";
 
 export default function CartScreen() {
   const navigation = useNavigation();
-  const { cartItems, removeFromCart, updateQuantity, clearCart, totalPrice } =
+  const { totalItems, cartItems, removeFromCart, updateQuantity, clearCart, totalPrice } =
     useCart();
 
   const handleCheckout = () => {
@@ -17,59 +17,81 @@ export default function CartScreen() {
   };
 
   return (
-    <View style={{ flex: 1, paddingTop: 50, paddingHorizontal: 16, backgroundColor: colors.background }}>
+    <View
+      style={{
+        flex: 1,
+        paddingTop: 50,
+        paddingHorizontal: 16,
+        backgroundColor: colors.background,
+      }}
+    >
       <HeaderWrapper
         title="Seu carrinho"
-        navigation={() => navigation.goBack()}
-        style={{ paddingHorizontal: 0 }}
       />
 
-      <FlatList
-        contentContainerStyle={{ padding: 16 }}
-        data={cartItems}
-        keyExtractor={(item) => item.productId.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.itemContainer}>
-            <View style={styles.itemInfos}>
-              <Text style={styles.itemName}>{item.name}</Text>
-              <Text style={styles.itemDetails}>Qtd: {item.quantity}</Text>
-              <Text style={styles.itemDetails}>
-                Subtotal: R$ {(item.quantity * item.price).toFixed(2)}
-              </Text>
+      {totalItems > 0 ? (
+        <FlatList
+          contentContainerStyle={{ padding: 16 }}
+          data={cartItems}
+          keyExtractor={(item) => item.productId.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.itemContainer}>
+              <View style={styles.itemInfos}>
+                <Text style={styles.itemName}>{item.name}</Text>
+                <Text style={styles.itemDetails}>Qtd: {item.quantity}</Text>
+                <Text style={styles.itemDetails}>
+                  Subtotal: R$ {(item.quantity * item.price).toFixed(2)}
+                </Text>
+              </View>
+              <View style={styles.actionsRow}>
+                <View style={styles.actionButton}>
+                  <MaterialCommunityIcons
+                    name="plus"
+                    size={18}
+                    color={colors.primary}
+                    onPress={() =>
+                      updateQuantity(item.productId, item.quantity + 1)
+                    }
+                  />
+                </View>
+                <View style={styles.actionButton}>
+                  <MaterialCommunityIcons
+                    name="minus"
+                    size={18}
+                    color={colors.primary}
+                    onPress={() =>
+                      updateQuantity(item.productId, item.quantity - 1)
+                    }
+                  />
+                </View>
+                <View style={styles.actionButton}>
+                  <MaterialCommunityIcons
+                    name="trash-can-outline"
+                    size={18}
+                    color={colors.danger}
+                    onPress={() => removeFromCart(item.productId)}
+                  />
+                </View>
+              </View>
             </View>
-            <View style={styles.actionsRow}>
-              <View style={styles.actionButton}>
-                <MaterialCommunityIcons
-                  name="plus"
-                  size={18}
-                  color={colors.primary}
-                  onPress={() =>
-                    updateQuantity(item.productId, item.quantity + 1)
-                  }
-                />
-              </View>
-              <View style={styles.actionButton}>
-                <MaterialCommunityIcons
-                  name="minus"
-                  size={18}
-                  color={colors.primary}
-                  onPress={() =>
-                    updateQuantity(item.productId, item.quantity - 1)
-                  }
-                />
-              </View>
-              <View style={styles.actionButton}>
-                <MaterialCommunityIcons
-                  name="trash-can-outline"
-                  size={18}
-                  color={colors.danger}
-                  onPress={() => removeFromCart(item.productId)}
-                />
-              </View>
-            </View>
-          </View>
-        )}
-      />
+          )}
+        />
+      ) : (
+        <View
+          style={{
+            width: "100%",
+            padding: 16,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text
+            style={{ fontSize: 16, fontWeight: "500", color: colors.danger }}
+          >
+            Nenhum item adicionado ao seu carrinho.
+          </Text>
+        </View>
+      )}
 
       <View style={{ paddingHorizontal: 16 }}>
         <Text style={styles.totalText}>Total: R$ {totalPrice.toFixed(2)}</Text>
