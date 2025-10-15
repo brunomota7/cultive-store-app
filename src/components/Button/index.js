@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity } from "react-native";
 import colors from "../../constants/colors";
 
-export default function Button({ onPress, label, icon, style }) {
+export default function Button({ onPress, label, icon, style, styleText }) {
   return (
     <TouchableOpacity
       style={[
@@ -22,11 +22,11 @@ export default function Button({ onPress, label, icon, style }) {
     >
       {icon}
       <Text
-        style={{
+        style={[{
           fontSize: 16,
           fontWeight: "700",
           color: colors.textWhite,
-        }}
+        }, styleText]}
       >
         {label}
       </Text>

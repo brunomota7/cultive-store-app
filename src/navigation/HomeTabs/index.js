@@ -6,6 +6,7 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 import { useState } from "react";
 import { useCart } from "../../context/cartContext";
 import CartScreen from "../../features/cart/screen/cartScreen";
+import Profile from "../../features/profile/screen/profileScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -99,7 +100,7 @@ export default function HomeTabs() {
       />
       <Tab.Screen
         name="Perfil"
-        component={HomeScreen}
+        component={Profile}
         options={{
           tabBarLabel: "Perfil",
           tabBarIcon: ({ color }) => (

@@ -1,18 +1,18 @@
 import { StyleSheet, Text, View } from "react-native";
 import colors from "../../constants/colors";
 
-export default function Separator({ label }) {
+export default function Separator({ label, style }) {
   if (label) {
     return (
-      <View style={styles.separatorContainer}>
-        <View style={styles.separator} />
+      <View style={[styles.separatorContainer, style]}>
+        <View style={[styles.separator, style]} />
         <Text style={styles.label}>{label}</Text>
-        <View style={styles.separator} />
+        <View style={[styles.separator, style]} />
       </View>
     );
   }
 
-  return <View style={styles.separator} />;
+  return <View style={[styles.separator, style]} />;
 }
 
 const styles = StyleSheet.create({
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   separator: {
     flex: 1,
     borderTopWidth: 1,
-    borderColor: colors.textMuted,
+    borderColor: colors.border,
   },
   label: {
     marginHorizontal: 12,
