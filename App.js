@@ -14,6 +14,7 @@ import ProductScreenByCategory from "./src/features/home/components/ProductWrapp
 import ProductDetails from "./src/features/product/screen/productDetails";
 import { CartProvider } from "./src/context/cartContext";
 import ConfirmAddressScreen from "./src/features/checkOutBuy/screen/confirmAddressScreen";
+import Payment from "./src/features/checkOutBuy/screen/paymentScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +44,7 @@ export default function App() {
             />
             <Stack.Screen name="ProductDetails" component={ProductDetails} />
             <Stack.Screen name="ConfirmAddress" component={ConfirmAddressScreen} />
+            <Stack.Screen name="Payment" component={Payment} />
           </Stack.Navigator>
         </NavigationContainer>
       </CartProvider>

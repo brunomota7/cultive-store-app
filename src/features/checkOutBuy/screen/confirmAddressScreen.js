@@ -11,6 +11,7 @@ import Button from "../../../components/Button";
 import ModalOptions from "../../home/modals/ModalOptions";
 import ModalAddAddress from "../../home/modals/ModalAddAddress";
 import ModalEditAddress from "../../home/modals/ModalEditAddress";
+import { useCart } from "../../../context/cartContext";
 
 const mockAddresses = [
   {
@@ -38,6 +39,7 @@ const mockAddresses = [
 
 export default function ConfirmAddressScreen() {
   const navigation = useNavigation();
+  const { cartItems, totalPrice } = useCart();
   const [valueSearch, setValueSearch] = useState("");
   const [selectedId, setSelectedId] = useState(null);
   const [addresses, setAddresses] = useState(mockAddresses);
@@ -89,7 +91,11 @@ export default function ConfirmAddressScreen() {
   const handleConfirm = () => {
     const selected = addresses.find((addr) => addr.id === selectedId);
     if (selected) {
-      navigation.navigate("Payment", { address: selected });
+      navigation.navigate("Payment", {
+        cartItems,
+        totalPrice,
+        address: selected,
+      });
     }
   };
 
@@ -167,7 +173,7 @@ export default function ConfirmAddressScreen() {
               color={colors.textWhite}
             />
           }
-          style={{ marginBottom: 10, marginTop: 10, }}
+          style={{ marginBottom: 10, marginTop: 10 }}
         />
 
         <Button
