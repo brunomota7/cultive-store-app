@@ -124,6 +124,34 @@ export default function Payment() {
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Método de pagamento</Text>
+
+        <View
+          style={{
+            marginBottom: 10,
+            padding: 16,
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 5,
+            borderWidth: 1,
+            borderRadius: 8,
+            borderColor: colors.danger,
+            backgroundColor: colors.surface,
+          }}
+        >
+          <MaterialCommunityIcons name="alert" size={24} color={colors.warning} />
+          <Text
+            style={{
+              color: colors.danger,
+              fontSize: 14,
+              fontWeight: "600",
+              textAlign: "center",
+            }}
+          >
+            Pagamento por cartão de crédito e débito estará disponível
+            futuramente.
+          </Text>
+        </View>
+
         {paymentMethods.map((method) => {
           const isSelected = selectedMethod === method.id;
           return (
@@ -189,13 +217,6 @@ export default function Payment() {
           onPress={handleCancel}
           style={{ backgroundColor: colors.danger, marginTop: 10 }}
         />
-
-        <View style={{ padding: 16 }}>
-          <Text style={{ color: colors.textMuted, fontSize: 12 }}>
-            Pagamento por cartão de crédito e débito estará disponível
-            futuramente.
-          </Text>
-        </View>
       </View>
 
       {showPixModal && (
