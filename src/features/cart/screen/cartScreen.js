@@ -9,8 +9,14 @@ import colors from "../../../constants/colors";
 
 export default function CartScreen() {
   const navigation = useNavigation();
-  const { totalItems, cartItems, removeFromCart, updateQuantity, clearCart, totalPrice } =
-    useCart();
+  const {
+    totalItems,
+    cartItems,
+    removeFromCart,
+    updateQuantity,
+    clearCart,
+    totalPrice,
+  } = useCart();
 
   const handleCheckout = () => {
     navigation.navigate("ConfirmAddress");
@@ -25,9 +31,7 @@ export default function CartScreen() {
         backgroundColor: colors.background,
       }}
     >
-      <HeaderWrapper
-        title="Seu carrinho"
-      />
+      <HeaderWrapper title="Seu carrinho" />
 
       {totalItems > 0 ? (
         <FlatList
@@ -93,22 +97,30 @@ export default function CartScreen() {
         </View>
       )}
 
-      <View style={{ paddingHorizontal: 16 }}>
-        <Text style={styles.totalText}>Total: R$ {totalPrice.toFixed(2)}</Text>
+      {totalItems > 0 && (
+        <View style={{ paddingHorizontal: 16 }}>
+          <Text style={styles.totalText}>
+            Total: R$ {totalPrice.toFixed(2)}
+          </Text>
 
-        <View style={styles.footerRow}>
-          <Button
-            label="Limpar carrinho"
-            onPress={clearCart}
-            style={{ backgroundColor: colors.danger, flex: 1, marginRight: 8 }}
-          />
-          <Button
-            label="Finalizar Compra"
-            onPress={handleCheckout}
-            style={{ backgroundColor: colors.success, flex: 1 }}
-          />
+          <View style={styles.footerRow}>
+            <Button
+              label="Limpar carrinho"
+              onPress={clearCart}
+              style={{
+                backgroundColor: colors.danger,
+                flex: 1,
+                marginRight: 8,
+              }}
+            />
+            <Button
+              label="Finalizar Compra"
+              onPress={handleCheckout}
+              style={{ backgroundColor: colors.success, flex: 1 }}
+            />
+          </View>
         </View>
-      </View>
+      )}
     </View>
   );
 }
