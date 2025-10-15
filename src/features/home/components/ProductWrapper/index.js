@@ -12,17 +12,21 @@ import HeaderWrapper from "../../../../components/HeaderWrapper";
 import SearchButton from "../../../../components/SearchButton";
 import { useState } from "react";
 import colors from "../../../../constants/colors";
+import FloatingButton from "../../../../components/FloatingButton";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import CartModal from "../../../cart/screen/cartModal";
 
 export default function ProductScreenByCategory() {
   const route = useRoute();
   const navigation = useNavigation();
   const { category } = route.params;
   const [search, setSearch] = useState("");
+  const [cartVisible, setCartVisible] = useState(false);
 
   const filteredProducts = MockProducts.filter(
-    (product) => 
-        product.category.name === category &&
-        product.name.toLowerCase().includes(search.toLowerCase())
+    (product) =>
+      product.category.name === category &&
+      product.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -63,6 +67,26 @@ export default function ProductScreenByCategory() {
           )}
         />
       </View>
+
+      <FloatingButton
+        icon={
+          <MaterialCommunityIcons
+            name="cart"
+            size={20}
+            color={colors.textWhite}
+          />
+        }
+        onPress={() => setCartVisible(true)}
+      />
+
+      <CartModal
+        visible={cartVisible}
+        onClose={() => setCartVisible(false)}
+        onCheckout={() => {
+          setCartVisible(false);
+          navigation.navigate("ConfirmAddress");
+        }}
+      />
     </View>
   );
 }
