@@ -4,30 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { renderStatusIcon } from "../../../utils/utils";
 import styles from "../styles/ordersStyles";
 import HeaderWrapper from "../../../components/HeaderWrapper";
-
-const mockOrders = [
-  {
-    id: "1",
-    date: "15/10/2025",
-    total: 89.9,
-    status: "A enviar",
-    items: ["Banana", "Tomate", "Alface"],
-  },
-  {
-    id: "2",
-    date: "12/10/2025",
-    total: 45.5,
-    status: "A caminho",
-    items: ["Cenoura", "Maçã"],
-  },
-  {
-    id: "3",
-    date: "08/10/2025",
-    total: 120.0,
-    status: "Entregue",
-    items: ["Melancia", "Couve", "Batata"],
-  },
-];
+import MockOrders from "../../../constants/mockOrders";
 
 export default function OrdersScreen() {
   const navigation = useNavigation();
@@ -38,7 +15,7 @@ export default function OrdersScreen() {
         <HeaderWrapper title={"Seus Pedidos"} />
 
         <FlatList
-          data={mockOrders}
+          data={MockOrders}
           keyExtractor={(item) => item.id}
           contentContainerStyle={{ paddingBottom: 20 }}
           renderItem={({ item }) => (

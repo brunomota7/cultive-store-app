@@ -80,7 +80,11 @@ export const renderStatusIcon = (status) => {
       );
     case "Entregue":
       return (
-        <MaterialCommunityIcons name="package-check" size={24} color="#32CD32" />
+        <MaterialCommunityIcons
+          name="package-check"
+          size={24}
+          color="#32CD32"
+        />
       );
     default:
       return null;
