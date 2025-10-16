@@ -93,27 +93,6 @@ export default function HomeTabs() {
         }}
       />
       <Tab.Screen
-        name="Notificacoes"
-        component={NotificationScreen}
-        options={{
-          tabBarLabel: "Notificação",
-          tabBarIcon: ({ color }) => (
-            <View style={{ position: "relative" }}>
-              <MaterialCommunityIcons
-                name="bell-outline"
-                size={24}
-                color={color}
-              />
-              {unreadCount > 0 && (
-                <View style={styles.badge}>
-                  <Text style={styles.badgeText}>{unreadCount}</Text>
-                </View>
-              )}
-            </View>
-          ),
-        }}
-      />
-      <Tab.Screen
         name="Perfil"
         component={Profile}
         options={{

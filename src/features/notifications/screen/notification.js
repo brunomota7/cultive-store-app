@@ -2,12 +2,13 @@ import { FlatList, Text, View } from "react-native";
 import styles from "../styles/notificationStyles";
 import { getIcon } from "../../../utils/utils";
 import HeaderWrapper from "../../../components/HeaderWrapper";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { useCallback } from "react";
 import { useNotifications } from "../../../context/notificationContext";
 
 export default function NotificationScreen() {
   const { notifications, markAllAsRead } = useNotifications();
+  const navigation = useNavigation();
 
   useFocusEffect(
     useCallback(() => {
@@ -23,7 +24,7 @@ export default function NotificationScreen() {
         </View>
       ) : (
         <View>
-          <HeaderWrapper title={"Notificações"} />
+          <HeaderWrapper title={"Notificações"} navigation={() => navigation.goBack() } />
           <FlatList
             data={notifications}
             keyExtractor={(item) => item.id}

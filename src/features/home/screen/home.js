@@ -16,8 +16,6 @@ import { useState } from "react";
 import styles from "../styles/homeStyles";
 import MockProducts from "../../../constants/mockProducts";
 import CategoryCard from "../components/CategoryCard";
-import { MaterialIcons } from "@expo/vector-icons";
-import AddressModal from "../modals/ModalAddress/addressModal";
 import colors from "../../../constants/colors";
 import Onboarding from "../../../components/Onboarding";
 import { useNavigation } from "@react-navigation/native";

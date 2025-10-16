@@ -17,6 +17,7 @@ import ConfirmAddressScreen from "./src/features/checkOutBuy/screen/confirmAddre
 import Payment from "./src/features/checkOutBuy/screen/paymentScreen";
 import { NotificationProvider } from "./src/context/notificationContext";
 import OrderSuccess from "./src/features/checkOutBuy/screen/orderSuccess";
+import NotificationScreen from "./src/features/notifications/screen/notification";
 
 const Stack = createNativeStackNavigator();
 
@@ -50,6 +51,7 @@ export default function App() {
                 name="ConfirmAddress"
                 component={ConfirmAddressScreen}
               />
+              <Stack.Screen name="Notificacoes" component={NotificationScreen} />
               <Stack.Screen name="Payment" component={Payment} />
               <Stack.Screen name="OrderSuccess" component={OrderSuccess} />
             </Stack.Navigator>
