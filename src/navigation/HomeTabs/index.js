@@ -8,6 +8,7 @@ import CartScreen from "../../features/cart/screen/cartScreen";
 import Profile from "../../features/profile/screen/profileScreen";
 import NotificationScreen from "../../features/notifications/screen/notification";
 import { useNotifications } from "../../context/notificationContext";
+import OrdersScreen from "../../features/orders/screen/ordersScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -77,12 +78,25 @@ export default function HomeTabs() {
           ),
         }}
       />
-
+      <Tab.Screen 
+        name="Orders"
+        component={OrdersScreen}
+        options={{
+          tabBarLabel: "Pedidos",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons 
+              name="package-variant"
+              size={24}
+              color={color}
+            />
+          ),
+        }}
+      />
       <Tab.Screen
         name="Notificacoes"
         component={NotificationScreen}
         options={{
-          tabBarLabel: "Notificações",
+          tabBarLabel: "Notificação",
           tabBarIcon: ({ color }) => (
             <View style={{ position: "relative" }}>
               <MaterialCommunityIcons

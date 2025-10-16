@@ -30,12 +30,59 @@ export const formtCategory = (rawCategory) => {
 export const getIcon = (type) => {
   switch (type) {
     case "success":
-      return <MaterialCommunityIcons name="check-circle" size={20} color={colors.success} />;
+      return (
+        <MaterialCommunityIcons
+          name="check-circle"
+          size={20}
+          color={colors.success}
+        />
+      );
     case "warning":
-      return <MaterialCommunityIcons name="alert-circle" size={20} color={colors.warning} />;
+      return (
+        <MaterialCommunityIcons
+          name="alert-circle"
+          size={20}
+          color={colors.warning}
+        />
+      );
     case "erro":
-      return <MaterialCommunityIcons name="cancel" size={20} color={colors.danger} />;
+      return (
+        <MaterialCommunityIcons name="cancel" size={20} color={colors.danger} />
+      );
     default:
-      return <MaterialCommunityIcons name="notifications" size={20} color={colors.primary} />
+      return (
+        <MaterialCommunityIcons
+          name="notifications"
+          size={20}
+          color={colors.primary}
+        />
+      );
+  }
+};
+
+export const renderStatusIcon = (status) => {
+  switch (status) {
+    case "A enviar":
+      return (
+        <MaterialCommunityIcons
+          name="package-variant"
+          size={24}
+          color="#FFA500"
+        />
+      );
+    case "A caminho":
+      return (
+        <MaterialCommunityIcons
+          name="truck-delivery"
+          size={24}
+          color="#00BFFF"
+        />
+      );
+    case "Entregue":
+      return (
+        <MaterialCommunityIcons name="package-check" size={24} color="#32CD32" />
+      );
+    default:
+      return null;
   }
 };
