@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Alert,
   Clipboard,
+  ScrollView,
 } from "react-native";
 import styles from "../styles/paymentStyles";
 import HeaderWrapper from "../../../components/HeaderWrapper";
@@ -94,22 +95,20 @@ export default function Payment() {
     <View style={styles.container}>
       <HeaderWrapper title="Pagamento" navigation={() => navigation.goBack()} />
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Endereço de entrega</Text>
-        <Text style={styles.addressText}>{address.street}</Text>
-        <Text style={styles.addressText}>
-          {address.city} • {address.zipCode}
-        </Text>
-        <Text style={styles.addressText}>{address.country}</Text>
-      </View>
+      <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Endereço de entrega</Text>
+          <Text style={styles.addressText}>{address.street}</Text>
+          <Text style={styles.addressText}>
+            {address.city} • {address.zipCode}
+          </Text>
+          <Text style={styles.addressText}>{address.country}</Text>
+        </View>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Itens do pedido</Text>
-        <FlatList
-          data={cartItems}
-          keyExtractor={(item) => item.productId.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.itemRow}>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Itens do pedido</Text>
+          {cartItems.map((item) => (
+            <View key={item.productId} style={styles.itemRow}>
               <Text style={styles.itemName}>{item.name}</Text>
               <Text style={styles.itemDetails}>
                 {item.quantity} x R$ {item.price.toFixed(2)}
@@ -118,168 +117,172 @@ export default function Payment() {
                 Subtotal: R$ {(item.quantity * item.price).toFixed(2)}
               </Text>
             </View>
-          )}
-        />
-      </View>
+          ))}
+        </View>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Método de pagamento</Text>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Método de pagamento</Text>
 
-        <View
-          style={{
-            marginBottom: 10,
-            padding: 16,
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 5,
-            borderWidth: 1,
-            borderRadius: 8,
-            borderColor: colors.danger,
-            backgroundColor: colors.surface,
-          }}
-        >
-          <MaterialCommunityIcons name="alert" size={24} color={colors.warning} />
-          <Text
+          <View
             style={{
-              color: colors.danger,
-              fontSize: 14,
-              fontWeight: "600",
-              textAlign: "center",
+              marginBottom: 10,
+              padding: 16,
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 5,
+              borderWidth: 1,
+              borderRadius: 8,
+              borderColor: colors.danger,
+              backgroundColor: colors.surface,
             }}
           >
-            Pagamento por cartão de crédito e débito estará disponível
-            futuramente.
-          </Text>
+            <MaterialCommunityIcons
+              name="alert"
+              size={24}
+              color={colors.warning}
+            />
+            <Text
+              style={{
+                color: colors.danger,
+                fontSize: 14,
+                fontWeight: "600",
+                textAlign: "center",
+              }}
+            >
+              Pagamento por cartão de crédito e débito estará disponível
+              futuramente.
+            </Text>
+          </View>
+
+          {paymentMethods.map((method) => {
+            const isSelected = selectedMethod === method.id;
+            return (
+              <TouchableOpacity
+                key={method.id}
+                style={[
+                  styles.paymentOption,
+                  isSelected && styles.paymentOptionSelected,
+                ]}
+                onPress={() => setSelectedMethod(method.id)}
+              >
+                {method.id === "pix" && (
+                  <MaterialCommunityIcons
+                    name="qrcode-scan"
+                    size={20}
+                    color={isSelected ? colors.textWhite : colors.secondary}
+                  />
+                )}
+                {method.id === "credit" && (
+                  <FontAwesome5
+                    name="credit-card"
+                    size={20}
+                    color={isSelected ? colors.textWhite : colors.secondary}
+                  />
+                )}
+                {method.id === "debit" && (
+                  <MaterialCommunityIcons
+                    name="credit-card-outline"
+                    size={20}
+                    color={isSelected ? colors.textWhite : colors.secondary}
+                  />
+                )}
+
+                <Text
+                  style={[
+                    styles.paymentLabel,
+                    isSelected ? { color: colors.textWhite } : null,
+                  ]}
+                >
+                  {method.label}
+                </Text>
+                {isSelected && (
+                  <MaterialCommunityIcons
+                    name="check-circle"
+                    size={20}
+                    color={colors.textWhite}
+                  />
+                )}
+              </TouchableOpacity>
+            );
+          })}
         </View>
 
-        {paymentMethods.map((method) => {
-          const isSelected = selectedMethod === method.id;
-          return (
-            <TouchableOpacity
-              key={method.id}
-              style={[
-                styles.paymentOption,
-                isSelected && styles.paymentOptionSelected,
-              ]}
-              onPress={() => setSelectedMethod(method.id)}
-            >
-              {method.id === "pix" && (
+        <View style={styles.section}>
+          <Text style={styles.totalText}>
+            Total da compra: R$ {totalPrice.toFixed(2)}
+          </Text>
+
+          <Button label="Finalizar pedido" onPress={handleFinish} />
+
+          <Button
+            label="Cancelar compra"
+            onPress={handleCancel}
+            style={{ backgroundColor: colors.danger, marginTop: 10 }}
+          />
+        </View>
+
+        {showPixModal && (
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTitle}>Pagamento via Pix</Text>
+              <View style={styles.qrCodeBox}>
                 <MaterialCommunityIcons
-                  name="qrcode-scan"
-                  size={20}
-                  color={isSelected ? colors.textWhite : colors.secondary}
+                  name="qrcode"
+                  size={120}
+                  color={colors.primary}
                 />
-              )}
-              {method.id === "credit" && (
-                <FontAwesome5
-                  name="credit-card"
-                  size={20}
-                  color={isSelected ? colors.textWhite : colors.secondary}
-                />
-              )}
-              {method.id === "debit" && (
-                <MaterialCommunityIcons
-                  name="credit-card-outline"
-                  size={20}
-                  color={isSelected ? colors.textWhite : colors.secondary}
-                />
-              )}
-
-              <Text
-                style={[
-                  styles.paymentLabel,
-                  isSelected ? { color: colors.textWhite } : null,
-                ]}
-              >
-                {method.label}
-              </Text>
-              {isSelected && (
-                <MaterialCommunityIcons
-                  name="check-circle"
-                  size={20}
-                  color={colors.textWhite}
-                />
-              )}
-            </TouchableOpacity>
-          );
-        })}
-      </View>
-
-      <View style={styles.section}>
-        <Text style={styles.totalText}>
-          Total da compra: R$ {totalPrice.toFixed(2)}
-        </Text>
-
-        <Button label="Finalizar pedido" onPress={handleFinish} />
-
-        <Button
-          label="Cancelar compra"
-          onPress={handleCancel}
-          style={{ backgroundColor: colors.danger, marginTop: 10 }}
-        />
-      </View>
-
-      {showPixModal && (
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Pagamento via Pix</Text>
-            <View style={styles.qrCodeBox}>
-              <MaterialCommunityIcons
-                name="qrcode"
-                size={120}
-                color={colors.primary}
-              />
-            </View>
-            <Text style={styles.pixCode}>{pixCode}</Text>
-            <TouchableOpacity
-              onPress={() => {
-                Clipboard.setString(pixCode),
-                  Alert.alert("Código Pix copiado.");
-              }}
-            >
-              <Text style={styles.copyText}>Copiar código Pix</Text>
-            </TouchableOpacity>
-            <Text style={styles.timerText}>
-              Tempo restante: {Math.floor(timeLeft / 60)}:
-              {(timeLeft % 60).toString().padStart(2, "0")}
-            </Text>
-            <Button
-              label="Confirmar pagamento"
-              onPress={() => {
-                setShowPixModal(false);
-                addNotification(
-                  "success",
-                  `Compra realizada com sucesso no valor de R$ ${totalPrice.toFixed(
-                    2
-                  )}.`
-                );
-                clearCart();
-                navigation.navigate("OrderSuccess");
-              }}
-            />
-
-            <TouchableOpacity
-              onPress={() => setShowPixModal(false)}
-              style={{
-                width: "100%",
-                alignItems: "center",
-                justifyContent: "center",
-                marginTop: 20,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: "500",
-                  color: colors.danger,
+              </View>
+              <Text style={styles.pixCode}>{pixCode}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  Clipboard.setString(pixCode),
+                    Alert.alert("Código Pix copiado.");
                 }}
               >
-                Cancelar
+                <Text style={styles.copyText}>Copiar código Pix</Text>
+              </TouchableOpacity>
+              <Text style={styles.timerText}>
+                Tempo restante: {Math.floor(timeLeft / 60)}:
+                {(timeLeft % 60).toString().padStart(2, "0")}
               </Text>
-            </TouchableOpacity>
+              <Button
+                label="Confirmar pagamento"
+                onPress={() => {
+                  setShowPixModal(false);
+                  addNotification(
+                    "success",
+                    `Compra realizada com sucesso no valor de R$ ${totalPrice.toFixed(
+                      2
+                    )}.`
+                  );
+                  clearCart();
+                  navigation.navigate("OrderSuccess");
+                }}
+              />
+
+              <TouchableOpacity
+                onPress={() => setShowPixModal(false)}
+                style={{
+                  width: "100%",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: 20,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: "500",
+                    color: colors.danger,
+                  }}
+                >
+                  Cancelar
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      )}
+        )}
+      </ScrollView>
     </View>
   );
 }
