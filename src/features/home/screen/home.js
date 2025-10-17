@@ -20,11 +20,6 @@ import colors from "../../../constants/colors";
 import Onboarding from "../../../components/Onboarding";
 import { useNavigation } from "@react-navigation/native";
 
-const user = {
-  name: "Bruno",
-  address: "R. dos Cedros, 12",
-};
-
 export default function HomeScreen() {
   const navigation = useNavigation();
   const [products, setProducts] = useState(MockProducts);

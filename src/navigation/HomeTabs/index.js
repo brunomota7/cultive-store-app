@@ -6,15 +6,17 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 import { useCart } from "../../context/cartContext";
 import CartScreen from "../../features/cart/screen/cartScreen";
 import Profile from "../../features/profile/screen/profileScreen";
-import NotificationScreen from "../../features/notifications/screen/notification";
-import { useNotifications } from "../../context/notificationContext";
 import OrdersScreen from "../../features/orders/screen/ordersScreen";
+import ConversationsScreen from "../../features/chat/screen/conversationsScreen";
+import { useChat } from "../../context/chatContext";
 
 const Tab = createBottomTabNavigator();
 
 export default function HomeTabs() {
   const { totalItems } = useCart();
-  const { unreadCount } = useNotifications();
+  const { unreadCounts } = useChat();
+
+  const totalUnread = Object.values(unreadCounts).reduce((sum, count) => sum + count, 0);
 
   return (
     <Tab.Navigator
@@ -78,13 +80,13 @@ export default function HomeTabs() {
           ),
         }}
       />
-      <Tab.Screen 
+      <Tab.Screen
         name="Orders"
         component={OrdersScreen}
         options={{
           tabBarLabel: "Pedidos",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons 
+            <MaterialCommunityIcons
               name="package-variant"
               size={24}
               color={color}
@@ -92,6 +94,30 @@ export default function HomeTabs() {
           ),
         }}
       />
+      <Tab.Screen
+        name="Conversation"
+        component={ConversationsScreen}
+        options={{
+          tabBarLabel: "Chat",
+          tabBarIcon: ({ color }) => (
+            <View style={{ position: "relative" }}>
+              <MaterialCommunityIcons
+                name="chat-outline"
+                size={24}
+                color={color}
+              />
+              {totalUnread > 0 && (
+                <View style={styles.badge}>
+                  <Text style={styles.badgeText}>
+                    {totalUnread > 99 ? "99+" : totalUnread}
+                  </Text>
+                </View>
+              )}
+            </View>
+          ),
+        }}
+      />
+
       <Tab.Screen
         name="Perfil"
         component={Profile}
